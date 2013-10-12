@@ -38,6 +38,9 @@ sub main {
 	# パース
 	my $obj = $xml->XMLin($res->content())->{'channel'};
 
+	# タイトルの不要な部分を削る
+	$obj->{'title'} =~ s/^マイリスト (.*)‐ニコニコ動画$/$1/gi;
+
 	foreach my $this (@{$obj->{'item'}}) {
 		# HTML解析
 		my $tree = HTML::TreeBuilder->new();
