@@ -5,7 +5,7 @@
 		var defaults = {
 			'mylist': 36922986,
 			'selector': ".nico_mylist",
-			'template': "./template.html",
+			'template': "./js/template.html",
 			'proxy': "./proxy.cgi",
 		};
 		
