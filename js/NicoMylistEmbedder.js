@@ -2,9 +2,9 @@
 
 	$.fn.NicoMylistEmbedder = function( options ){
 		// 設定の読み込み
+		var selector = this;
 		var defaults = {
 			'mylist': 36922986,
-			'selector': ".nico_mylist",
 			'template': "./js/template.html",
 			'proxy': "./proxy.cgi",
 		};
@@ -26,7 +26,7 @@
 		})
 		// テンプレートファイルが読み込めなかったら
 		.fail(function(data, status, errorThrown) {
-			$("<div class='errmes'>").text("[Error] テンプレートファイルが読み込めませんでした ("+errorThrown+")").appendTo(setting.selector);
+			$("<div class='errmes'>").text("[Error] テンプレートファイルが読み込めませんでした ("+errorThrown+")").appendTo(selector);
 		})
 		
 
@@ -38,11 +38,11 @@
 		})
 		.done(function(data) {
 			// テンプレートに従って表示
-			$(setting.selector).text('');
-			$.tmpl($template, data).appendTo(setting.selector);
+			$(selector).text('');
+			$.tmpl($template, data).appendTo(selector);
 		})
 		.fail(function(data, status, errorThrown) {
-			$("<div class='errmes'>").text("[Error] マイリストが読み込めませんでした ("+errorThrown+")").appendTo(setting.selector);
+			$("<div class='errmes'>").text("[Error] マイリストが読み込めませんでした ("+errorThrown+")").appendTo(selector);
 		});
 		
 	}
