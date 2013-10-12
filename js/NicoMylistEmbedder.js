@@ -5,7 +5,7 @@
 		var defaults = {
 			'mylist': 36922986,
 			'selector': ".nico_mylist",
-			'template': "./js/template.html",
+			'template': "./template.html",
 			'proxy': "./proxy.cgi",
 		};
 		
@@ -20,13 +20,13 @@
 			type: 'get',
 			dataType: 'html',
 		})
+		// テンプレートファイルが読み込めたら
 		.done(function(data) {
 			$template = data;
 		})
-		.fail(function() {
-			console.log("テンプレートファイルが読み込めませんでした");
-		})
-		.always(function() {
+		// テンプレートファイルが読み込めなかったら
+		.fail(function(data, status, errorThrown) {
+			$("<div class='errmes'>").text("[Error] テンプレートファイルが読み込めませんでした ("+errorThrown+")").appendTo(setting.selector);
 		});
 		
 
@@ -37,15 +37,12 @@
 			dataType: 'json',
 		})
 		.done(function(data) {
-			console.dir(data);
 			// テンプレートに従って表示
 			$.tmpl($template, data).appendTo(setting.selector);
 		})
-		.fail(function() {
-			console.log("error");
+		.fail(function(data, status, errorThrown) {
+			$("<div class='errmes'>").text("[Error] マイリストが読み込めませんでした ("+errorThrown+")").appendTo(setting.selector);
 		})
-		.always(function() {
-		});
 		
 	}
 
