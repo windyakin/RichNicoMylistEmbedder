@@ -15,33 +15,50 @@ use Encode;
 use LWP::UserAgent;
 use XML::Simple;
 use JSON;
+use HTML::TreeBuilder;
 
-print "oppau";
 # メイン関数の戻り値を終了コードとする
-print "Content-type: text/plain; charset=UTF-8\n\n";
 exit(main());
 
 sub main {
 
+	# LWP
 	my $proxy = LWP::UserAgent->new();
 	$proxy->timeout(5);
 	$proxy->agent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0");
 
+	# 取ってくる
 	my $res = $proxy->get("http://www.nicovideo.jp/mylist/".($ARGV[0]||'36922986')."?rss=2.0&lang=ja-jp");
 
 	# エラーであれば終わる
 	if ( !$res->is_success ) { return $res->status_line(); }
 
-	my $xml = new XML::Simple(ForceArray => ['item']);
-	my $obj = $xml->XMLin(decode('utf-8', $res->content()))->{'channel'};
+	# XML解析
+	my $xml = XML::Simple->new(ForceArray => ['item']);
+	# パース
+	my $obj = $xml->XMLin($res->content())->{'channel'};
 
 	foreach my $this (@{$obj->{'item'}}) {
-		print Dumper $this;
+		# HTML解析
+		my $tree = HTML::TreeBuilder->new();
+		# パース
+		$tree->parse($this->{'description'});
+		my %vid_info = (
+			'text'		=> $tree->look_down('class', 'nico-memo')->as_text,
+			'thumb'		=> $tree->look_down('class', 'nico-thumbnail')->find('img')->attr('src'),
+			'date'		=> $tree->look_down('class', 'nico-info-date')->as_text(),
+			'length'	=> $tree->look_down('class', 'nico-info-length')->as_text(),
+		);
+		# 書き換え
+		$this->{'description'} = \%vid_info;
+		# メモリ食うので気をつけよう
+		$tree->delete;
 	}
 
 	# 表示
-	#print "Content-type: text/plain; charset=UTF-8\n\n";
-	#print JSON->new->encode($obj);
+	print "Content-type: text/plain; charset=UTF-8\n\n";
+	print encode_utf8(JSON->new->encode($obj));
 
 	return 0;
+
 }
