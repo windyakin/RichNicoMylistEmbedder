@@ -27,7 +27,7 @@
 		// テンプレートファイルが読み込めなかったら
 		.fail(function(data, status, errorThrown) {
 			$("<div class='errmes'>").text("[Error] テンプレートファイルが読み込めませんでした ("+errorThrown+")").appendTo(setting.selector);
-		});
+		})
 		
 
 		// その次にマイリストをproxy.cgi経由で取得
@@ -38,11 +38,12 @@
 		})
 		.done(function(data) {
 			// テンプレートに従って表示
+			$(setting.selector).text('');
 			$.tmpl($template, data).appendTo(setting.selector);
 		})
 		.fail(function(data, status, errorThrown) {
 			$("<div class='errmes'>").text("[Error] マイリストが読み込めませんでした ("+errorThrown+")").appendTo(setting.selector);
-		})
+		});
 		
 	}
 

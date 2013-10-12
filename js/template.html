@@ -1,11 +1,15 @@
-<h2><a href="${link}">${title}</a></h2>
+<h3><a href="${link}">${title}</a></h3>
 <p>${description}</p>
 
 {{each(i,video) item}}
-	<h3><a href="${link}">${title}</a></h3>
-	<div class="thumb"><img src="${description.thumb}"></div>
-	<p>${description.text}</p>
-	<div class="date">${ (description.date).replace(/(：)/g, ":") }</div>
-	<div class="length">${description.length}</div>
+	<dl>
+		<dt><a href="${link}">${title}</a></dt>
+		<dd>
+			<div class="thumb"><img src="${description.thumb}"></div>
+			<p>${description.text}</p>
+			<div class="date">${ (description.date).replace(/(：)/g, ":") }</div>
+			<div class="length">${description.length}</div>
+		</dd>
+	</dl>
 {{/each}}
 
