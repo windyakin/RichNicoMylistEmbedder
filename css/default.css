@@ -3,3 +3,73 @@
   font-family: 'Arial','メイリオ','ＭＳ Ｐゴシック', 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro', Sans-serif;
   line-height: 1.4em;
 }
+
+body {
+  text-align: center;
+}
+
+div.nico_mylist {
+  width: 500px;
+  margin: 0 auto;
+  padding: 1em;
+  text-align: left;
+  background: #EEE;
+  border-radius: 5px;
+}
+div.nico_mylist h3 {
+  margin: 0 0 .5em 0;
+  padding: .2em;
+  border-bottom: 1px dotted #888;
+}
+div.nico_mylist h3 a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+}
+div.nico_mylist dl {
+  background: #DDD;
+  padding: 10px;
+}
+div.nico_mylist dl dt {
+  margin: 0 0 .5em 0;
+  font-size: 1.05em;
+  font-weight: bold;
+}
+div.nico_mylist dl dt a {
+  display: block;
+  text-decoration: none;
+  color: #555;
+}
+div.nico_mylist dl dd {
+  overflow: hidden;
+  *zoom: 1;
+  margin: 0;
+  padding: 0;
+}
+div.nico_mylist dl dd .thumb {
+  float: left;
+  width: 130px;
+  height: 100px;
+  position: relative;
+  margin-right: 10px;
+}
+div.nico_mylist dl dd .thumb .length {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 1px 2px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFF;
+}
+div.nico_mylist dl dd p {
+  margin: 0;
+  font-size: .95em;
+}
+div.nico_mylist dl dd .date {
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: .8em;
+}

@@ -5,10 +5,9 @@
 	<dl>
 		<dt><a href="${link}">${title}</a></dt>
 		<dd>
-			<div class="thumb"><img src="${description.thumb}"></div>
+			<div class="thumb"><img src="${description.thumb}"><div class="length">${description.length}</div></div>
+			<div class="date">放送日 ${(description.date).replace(/(：)/g, ":")}</div>
 			<p>${description.text}</p>
-			<div class="date">${ (description.date).replace(/(：)/g, ":") }</div>
-			<div class="length">${description.length}</div>
 		</dd>
 	</dl>
 {{/each}}
