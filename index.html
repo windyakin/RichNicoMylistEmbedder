@@ -5,8 +5,18 @@
 	<title>RichNicoMylistEmbedder Demo</title>
 </head>
 <body>
-<div id="memo">
-http://www.nicovideo.jp/mylist/36922986
+
+<div class="nico_mylist">
 </div>
+
+<script type="text/javascript" src="./js/lib/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="./js/NicoMylistEmbedder.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".nico_mylist").NicoMylistEmbedder({
+			'mylist' :36922986,
+		});
+	});
+</script>
 </body>
 </html>
